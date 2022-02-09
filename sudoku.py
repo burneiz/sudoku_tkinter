@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import *
 
 class App(tk.Tk):
     def __init__(self):
@@ -8,18 +9,18 @@ class App(tk.Tk):
         self.title('Suduko')
         self.configure(padx=20)
         # Labels
-        overskrift = ttk.Label(self, text='Sudoku', font=('Helvetica', 36))
+        overskrift = ttk.Label(self, text='Sudoku', font=('Sans-Serif', 40))
         overskrift.grid(row=0, columnspan=10, padx=5, pady=20)
 
         # Crate the Sudoku boards
-        entries = []
+        self.entries = []
         grid_dim = 9
 
         for row in range(grid_dim):
             for col in range(grid_dim):
 
-                entry = tk.Entry(self, width=3, highlightthickness=1, highlightbackground='#000000')
-                
+                entry = tk.Entry(self, justify='center', width=3, highlightthickness=1, highlightbackground='#000000')
+    
                 pad_y = (0, 0)
                 pad_x = (0, 0)
                 
@@ -30,24 +31,31 @@ class App(tk.Tk):
                     pad_x = (0, 10)
 
                 entry.grid(row=1+row, column=1+col, ipadx=10, ipady=10, padx=pad_x, pady=pad_y)
-        entries.append(entry)
+        self.entries.append(entry)
 
         # Buttons on the bottom of the screen
         # Reset the board and start over
         reset = ttk.Button(self, text='Reset', command=self.reset_sudoku)
-        reset.grid(row=10, column=0, columnspan=10, sticky='W', padx=5, pady=20)
+        reset.grid(row=10, column=0, columnspan=10, sticky='W', padx=5, pady=15)
 
         # Generate new sudoku
         generate = ttk.Button(self, text='Generate', command=self.generate_sudoku)
-        generate.grid(row=10, column=0, columnspan=10, padx=5, pady=20)
+        generate.grid(row=10, column=0, columnspan=10, padx=5, pady=15)
 
         # Finish
         finish = ttk.Button(self, text='Finish', command=self.finish_sudoku)
-        finish.grid(row=10, column=0, columnspan=10, sticky='E', padx=5, pady=20)
+        finish.grid(row=10, column=0, columnspan=10, sticky='E', padx=5, pady=15)
+
+        # Copyright label
+        copyright = Label(self, text='© Bjørnar Borge', font=('Sans-Serif', '8'))
+        copyright.grid(row=11, columnspan=10, padx=5, pady=10)
 
 
     def reset_sudoku(self):
-        print('reset_sudoku')
+        print('Resetting Sudoku')
+        # for entry in self.entries:
+        #    entry = ''
+        #    self.entries(entry)
 
     def generate_sudoku(self):
         print('generate_sudoku')
